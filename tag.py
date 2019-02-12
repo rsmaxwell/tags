@@ -28,6 +28,7 @@ class Image:
 
     def created(self, value):
         self.args.append("-CreateDate=" + value)
+        self.args.append("-DateTimeOriginal=" + value)
         return self
 
     def rating(self, value):
@@ -62,10 +63,20 @@ class Image:
         self.args.append("-GPSLongitude=" + str(value.longitudeDeg) + ' deg ' + str(value.longitudeMin) + "' " + str(value.longitudeSec) + '"')
         return self
 
-    def tag(self, value):
+    def gps_clear(self):
+        self.args.append("-GPSLatitudeRef=")
+        self.args.append("-GPSLatitude=")
+        self.args.append("-GPSLongitudeRef=")
+        self.args.append("-GPSLongitude=")
+        return self
+
+    def keywords(self, value):
         for tag in (value):
             self.args.append("-Keywords=" + tag)
         return self 
+
+    def keywords_clear(self, value):
+        self.args.append("-Keywords=")
 
     def exiftool(self):
         for filename in (self.filenames):
