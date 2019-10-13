@@ -4,4 +4,13 @@ import tag
 import location as loc
 
 
-tag.Image(['img1559.jpg']).gps(loc.stanneylands_road).exiftool()
+
+
+
+
+# John and Ronald trip to london - before Cornwall holiday
+timestamp = '1972:06:02 12:00:00'
+location = loc.hms_belfast
+tag.Image(['img1437.jpg']).created(timestamp).rating('good').gps(location).keywords(['1970s']).exiftool()
+
+

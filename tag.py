@@ -75,8 +75,9 @@ class Image:
             self.args.append("-Keywords=" + tag)
         return self 
 
-    def keywords_clear(self, value):
+    def keywords_clear(self):
         self.args.append("-Keywords=")
+        return self 
 
     def exiftool(self):
         for filename in (self.filenames):
@@ -84,18 +85,16 @@ class Image:
             args.append(filename)
             print("Updating " + filename)
             try:
-                subprocess.run(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+                subprocess.run(args, stdout=None, stderr=None, check=True)
             except subprocess.CalledProcessError as e:
                 print("Process ended with an error:")
                 print("-----[ args ]------------------")
+                print("   ")
                 for arg in args:
-                    print("    " + arg)
-                if (e.stdout != None):
-                    print("-----[ stdout ]------------------")
-                    print("stdout:" + e.stdout.decode('utf-8'))
-                if (e.stderr != None):
-                    print("-----[ stderr ]------------------")
-                    print("stderr:" + e.stderr.decode('utf-8'))
+                    print(' "' + arg.replace('"', '\\"') + '"', end='')
+                print("")
+                print("-----[ output ]------------------")
+                print(e.output)
                 print("-----[ returncode: " + str(e.returncode) + " ]------------------")
                 sys.exit(1)
 
