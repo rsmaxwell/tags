@@ -81,6 +81,7 @@ class Image:
 
     def exiftool(self):
         for filename in (self.filenames):
+            self.args.append("-ignoreMinorErrors")
             args = self.args.copy()
             args.append(filename)
             print("Updating " + filename)
