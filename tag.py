@@ -26,6 +26,15 @@ class Image:
         self.args = ["exiftool"]
         self.args.append("-overwrite_original_in_place")
 
+    def title(self, value):
+        self.args.append("-Title=" + value)  # Windows 
+        return self
+
+    def description(self, value):
+        self.args.append("-Description=" + value) # PhotoStation 
+        self.args.append("-XPSubject=" + value) # Windows 
+        return self
+
     def created(self, value):
         self.args.append("-CreateDate=" + value)
         self.args.append("-DateTimeOriginal=" + value)
